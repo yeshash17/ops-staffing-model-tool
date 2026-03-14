@@ -73,4 +73,6 @@ export default defineConfig([
   },
 ])
 ```
-Author: https://github.com/VasikaranB
+Author: 
+https://github.com/yeshash17
+https://github.com/VasikaranB
