@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: staffing-portal
+  labels:
+    app: staffing-portal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: staffing-portal
+  template:
+    metadata:
+      labels:
+        app: staffing-portal
+    spec:
+      containers:
+        - name: staffing-portal
+          image: staffing-portal:latest
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
